@@ -1,5 +1,15 @@
 <p class="small text-center" id="post-share-links">
   &nbsp;Share on:
+
+    <a href="http://service.weibo.com/share/share.php?url={{request.url | urlencode}}%3Futm_source=sina-weibo&title={{post.title | urlencode}}"
+     target="_blank" title="Share on Sina-Weibo">新浪微博</a>
+    /
+  <a href="http://shuo.douban.com/!service/share?href={{request.url | urlencode}}%3Futm_source=douban"
+     target="_blank" title="Share on Douban">豆瓣</a>
+    /
+    <a href="http://connect.qq.com/widget/shareqq/index.html?url={{request.url | urlencode}}%3Futm_source=qq&title={{post.title | urlencode}}"
+     target="_blank" title="Share on QQ">QQ</a>
+    /
   <a href="http://twitter.com/home?status={{ post.title | urlencode }}%20{{ request.url | urlencode }}%3Futm_source=twitter
 {% if config.BLOGGING_SITENAME %}%20%23{{ config.BLOGGING_SITENAME | replace(' ', '') | urlencode }}{% endif %}
 {% if config.BLOGGING_TWITTER_USERNAME %}%20{{ config.BLOGGING_TWITTER_USERNAME | urlencode }}{% endif %}"
