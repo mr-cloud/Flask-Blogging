@@ -1,6 +1,6 @@
 {% extends 'blogging/base.html' %}
 {% block extrastyle %}
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.10.0/css/bootstrap-markdown.min.css"
+<link href="{{ url_for('blogging.static', filename='css/bootstrap-markdown.min.css') }}"
       rel="stylesheet"/>
 {% endblock extrastyle %}
 {% block main %}
@@ -59,9 +59,9 @@
 
 {% block extrajs %}
     <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.10.0/js/bootstrap-markdown.js">
+        src="{{ url_for('blogging.static', filename='js/bootstrap-markdown.js') }}">
     </script>
     <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-markdown/2.10.0/js/bootstrap-markdown.min.js">
+        src="{{ url_for('blogging.static', filename='js/bootstrap-markdown.min.js') }}">
     </script>
 {% endblock extrajs %}

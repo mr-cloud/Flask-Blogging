@@ -387,7 +387,8 @@ def cached_func(blogging_engine, func):
 
 def create_blueprint(import_name, blogging_engine):
 
-    blog_app = Blueprint("blogging", import_name, template_folder='templates')
+    blog_app = Blueprint("blogging", import_name, template_folder='templates',
+                         static_folder="static", static_url_path="/static")
 
     # register index
     index_func = cached_func(blogging_engine, index)

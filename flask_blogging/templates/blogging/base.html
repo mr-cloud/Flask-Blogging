@@ -5,7 +5,8 @@
     {% block meta %}
     {% endblock meta %}
     {% block style %}
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="{{ url_for('blogging.static', filename='css/bootstrap.min.css') }}" rel="stylesheet"/>
+        <link href="{{ url_for('blogging.static', filename='css/font-awesome.min.css') }}" rel="stylesheet">
     <style>
         body { padding-top: 80px;}
     </style>
@@ -16,6 +17,8 @@
         {% block title %}
         {% endblock title %}
     </title>
+
+
 </head>
 <body>
 
@@ -32,7 +35,36 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
+            <span class="navbar-text">
+                    {% if current_user.is_authenticated %}
+                        <a href="/blog/logout/"> <span class="fa fa-sign-out">Logout</span> </a>
+                    {% else %}
+                        <a id="loginLink">
+                            <span class="fa fa-sign-in">Login</span>
+                        </a>
+                    {% endif %}
+            </span>
         </div>
+    </div>
+
+    <div id="loginModal" class="modal">
+      <form class="modal-content" action="/blog/login">
+
+        <div class="container">
+          <label><b>Username</b></label>
+          <input type="text" placeholder="Enter Username" name="uname" required>
+
+          <label><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="psw" required>
+
+          <button type="submit">Login</button>
+          <input type="checkbox" checked="checked"> Remember me
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+          <button type="button" onclick="document.getElementById('loginModal').style.display='none'" class="cancelbtn">Cancel</button>
+        </div>
+      </form>
     </div>
 
     <!-- main content -->
@@ -63,9 +95,9 @@
      </div>
     {% include "blogging/analytics.html" %}
     {% block js %}
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('blogging.static', filename='js/jQuery-2.1.4.min.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML"></script>
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('blogging.static', filename='js/bootstrap.min.js') }}"></script>
     <script type="text/x-mathjax-config">
           MathJax.Hub.Config({
           "HTML-CSS": {
@@ -81,6 +113,13 @@
             $("#alert_div").fadeTo(3000, 500).slideUp(500, function(){
                $("#alert_div").slideUp(500);
                 });
+
+            $('#loginLink').click(function(){
+            console.log('login triggered');
+            $('#loginModal').modal();
+        });
+
+
         })
     </script>
 
